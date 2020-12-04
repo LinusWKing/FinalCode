@@ -91,7 +91,7 @@ public:
 };
 Employee employee[10];
 
-class Customer
+class Donor
 {
 public:
 	std::string loginID, email, password, custName, custID;
@@ -107,24 +107,24 @@ public:
 	}
 	void displayDetails()
 	{
-		std::cout << "Customer ID: " << custID << std::endl
-				  << "Customer name: " << custName << std::endl
-				  << "Customer Email: " << email;
+		std::cout << "Donor ID: " << custID << std::endl
+				  << "Donor name: " << custName << std::endl
+				  << "Donor Email: " << email;
 	}
 	void addDetails()
 	{
 		custID = "CR" + std::to_string(custCount + 1);
 		loginID = "FSC" + std::to_string(custCount);
-		// std::cout << "Enter the Customer ID:";
+		// std::cout << "Enter the Donor ID:";
 		// std::cin >> custID;
-		std::cout << "\t\t CUSTOMER REGISTRATION \n\n";
-		std::cout << "Enter the Customer Name: ";
+		std::cout << "\t\t DONOR REGISTRATION \n\n";
+		std::cout << "Enter the Donor Name: ";
 		std::cin >> custName;
 		std::cout << std::endl;
-		std::cout << "Enter the Customer Email: ";
+		std::cout << "Enter the Donor Email: ";
 		std::cin >> email;
 		std::cout << std::endl;
-		std::cout << "Enter the Customer Password: ";
+		std::cout << "Enter the Donor Password: ";
 		std::cin >> password;
 		std::cout << std::endl;
 
@@ -135,9 +135,9 @@ public:
 		PressAKeyToContinue();
 	}
 };
-Customer customer[15];
+Donor donor[15];
 
-void funCustomer()
+void funDonor()
 {
 	int i = 0, isTrue = 0;
 	int ch, isFunExit, currPos;
@@ -147,9 +147,9 @@ CUS:
 	do
 	{
 
-		std::cout << "\t\t HELLO CUSTOMER \n\n";
+		std::cout << "\t\t HELLO DONOR \n\n";
 		std::cout << "Please select an option\n\n";
-		std::cout << "1.Login for Current Customer\n2.Registration for New Customer\n0.Previous Menu";
+		std::cout << "1.Login for Current Donor\n2.Registration for New Donor\n0.Previous Menu";
 		std::cout << "\n\nEnter Selected Option: ";
 
 		if (!(std::cin >> ch))
@@ -165,7 +165,7 @@ CUS:
 		{
 		LOGIN:
 		case 1:
-			std::cout << "\n*****Please Login For Customer*****\n\n";
+			std::cout << "\n*****Please Login For Donor*****\n\n";
 			std::cout << "\nLogin ID: ";
 			std::cin >> loginID;
 			std::cout << "\nPassword: ";
@@ -173,7 +173,7 @@ CUS:
 
 			for (i = 0; i < 15; i++)
 			{
-				if (customer[i].loginID == loginID && customer[i].password == password)
+				if (donor[i].loginID == loginID && donor[i].password == password)
 				{
 					currPos = i;
 					isTrue = 1;
@@ -183,7 +183,7 @@ CUS:
 			if (isTrue)
 			{
 				int isLogout, custCh;
-				std::cout << "\t\t Welcome, " << customer[currPos].custName;
+				std::cout << "\t\t Welcome, " << donor[currPos].custName;
 			ACC:
 				do
 				{
@@ -204,7 +204,7 @@ CUS:
 					switch (custCh)
 					{
 					case 1:
-						transcation[tranCount].makeDonation(customer[currPos].custID, customer[currPos].custName);
+						transcation[tranCount].makeDonation(donor[currPos].custID, donor[currPos].custName);
 						isLogout = 1;
 						tranCount++;
 						break;
@@ -213,7 +213,7 @@ CUS:
 						for (int k = 0; k < tranCount; k++)
 						{
 
-							if (transcation[k].custID == customer[currPos].custID)
+							if (transcation[k].custID == donor[currPos].custID)
 							{
 								//std::cout << "run";
 								std::cout << k + 1 << ". "
@@ -241,10 +241,10 @@ CUS:
 						if (updateP == 1)
 						{
 							std::string email;
-							std::cout << "Current Email is: " << customer[currPos].email;
+							std::cout << "Current Email is: " << donor[currPos].email;
 							std::cout << "\nEnter the Updated Email: ";
 							std::cin >> email;
-							customer[currPos].updateEmail(email);
+							donor[currPos].updateEmail(email);
 							std::cout << "Email updated successfuly";
 							PressAKeyToContinue();
 						}
@@ -255,7 +255,7 @@ CUS:
 							std::cout << "\nEnter the Updated Password: ";
 							std::cin >> password;
 
-							if (password == customer[currPos].password)
+							if (password == donor[currPos].password)
 							{
 								std::cout << "\nNew Password cannot be the same as old password. Please try again.";
 								PressAKeyToContinue();
@@ -266,7 +266,7 @@ CUS:
 							else
 							{
 
-								customer[currPos].updatePassword(password);
+								donor[currPos].updatePassword(password);
 								std::cout << "Password updated successfuly";
 								PressAKeyToContinue();
 							}
@@ -275,13 +275,13 @@ CUS:
 						break;
 
 					case 4:
-						customer[currPos].displayDetails();
+						donor[currPos].displayDetails();
 						isLogout = 1;
 						PressAKeyToContinue();
 						break;
 
 					case 5:
-						funCustomer();
+						funDonor();
 
 					default:
 						std::cout << "\n Invalid option selected. Please try again.\n";
@@ -303,7 +303,7 @@ CUS:
 			break;
 
 		case 2:
-			customer[custCount].addDetails();
+			donor[custCount].addDetails();
 			custCount++;
 			isFunExit = 1;
 			break;
@@ -386,7 +386,7 @@ EMP:
 					case 1:
 						for (int j = 0; j < custCount; j++)
 						{
-							customer[j].displayDetails();
+							donor[j].displayDetails();
 							std::cout << std::endl;
 							std::cout << std::endl;
 						}
@@ -506,7 +506,7 @@ LOOP:
 	do
 	{
 		std::cout << "\nPlease select from the following options\n";
-		std::cout << "\n1.Customer\n2.Employee\n3.Exit\n\nEnter Selected Option: ";
+		std::cout << "\n1.Donor\n2.Employee\n3.Exit\n\nEnter Selected Option: ";
 		if (!(std::cin >> ch))
 		{
 			std::cout << "\nPlease Input Valid Numeric Choice Only" << std::endl;
@@ -518,7 +518,7 @@ LOOP:
 		switch (ch)
 		{
 		case 1:
-			funCustomer();
+			funDonor();
 			isExit = 1;
 			break;
 
